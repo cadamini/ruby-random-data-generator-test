@@ -17,5 +17,6 @@ start_date, end_date = ExportDateRange.for(first_arg_or_actual_year)
 OutputGenerator.new(
 	region: second_param_or_german_holidays, 
 	start_date: start_date, 
-	end_date: end_date
+	end_date: end_date,
+	queue_name: ARGV[2] || 'Test'
 ).run

@@ -3,12 +3,13 @@ require_relative 'distribution'
 require_relative 'interval_value_randomizer'
 
 class OutputGenerator
-  attr_reader :start_date, :end_date, :region
+  attr_reader :start_date, :end_date, :region, :queue_name
 
-  def initialize(start_date:, end_date:, region:)
+  def initialize(start_date:, end_date:, region:, queue_name:)
     @region = region
     @start_date = start_date
     @end_date = end_date
+    @queue_name = queue_name
   end
 
   def run
@@ -50,7 +51,7 @@ class OutputGenerator
       daily_distribution.each_with_index do |value, interval|
         random_value = IntervalValueRandomizer.new(daily_volume, value)
         time_string = build_time_string(interval)
-        puts "Hotline2;#{date.strftime('%d.%m.%Y')};#{time_string};#{random_value.calls};#{random_value.handled_calls};#{random_value.aht}" 
+        puts "#{queue_name};#{date.strftime('%d.%m.%Y')};#{time_string};#{random_value.calls};#{random_value.handled_calls};#{random_value.aht}" 
       end
   end
 
