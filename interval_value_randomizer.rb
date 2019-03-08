@@ -1,11 +1,13 @@
+# input: daily total and a distribution percentage
+# output values per interval
 class IntervalValueRandomizer
-  def initialize(sum, value)
-    @sum = sum # rename
-    @value = value # rename
+  def initialize(daily_total, distribution_factor)
+    @daily_total = daily_total 
+    @distribution_factor = distribution_factor # rename
   end
 
   def calls
-    (@value * avg_per_interval * random_de_or_increase).floor
+    (@distribution_factor * average_value * random_modifier).floor
   end
 
   def handled_calls
@@ -13,15 +15,18 @@ class IntervalValueRandomizer
   end
 
   def aht
-    return 0 if calls == 0
-    (random_de_or_increase * avg_per_interval * random_de_or_increase + 100).floor
+    return 0 if calls.zero?
+
+    (random_modifier * average_value * random_modifier + 100).floor
   end
 
-  def avg_per_interval
-    @sum / 96
+  private 
+
+  def average_value
+    @daily_total / 96
   end
 
-  def random_de_or_increase
+  def random_modifier
     rand(0.96..1.1)
   end
 end
