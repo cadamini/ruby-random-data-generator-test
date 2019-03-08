@@ -2,7 +2,7 @@
 # output values per interval
 class IntervalValueRandomizer
   def initialize(daily_total, distribution_factor)
-    @daily_total = daily_total 
+    @daily_total = daily_total
     @distribution_factor = distribution_factor # rename
   end
 
@@ -20,7 +20,7 @@ class IntervalValueRandomizer
     (random_modifier * average_value * random_modifier + 100).floor
   end
 
-  private 
+  private
 
   def average_value
     @daily_total / 96
