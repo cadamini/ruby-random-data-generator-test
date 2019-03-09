@@ -10,15 +10,17 @@ class Distribution
 
   def normal_week
     d = 1.0  / 7
-    daily_factors = [d+0.1, d+0.12, d+0.15, d-0.2, d-0.3, 0, 0]
+    daily_factors = [d+0.1, d+0.12, d+0.15, d-0.02, d-0.03, 0, 0]
     daily_factors.each_with_index do |factor, i| @week[i] = factor end
+    puts @week.inspect
     @week
   end
 
   def special_week
     d = 1.0  / 7
-    daily_factors = [d+0.3, d+0.2, d+0.09, d-0.07, d-0.04, 0, 0]
+    daily_factors = [d+0.14, d, d+0.09, d, d, 0, 0]
     daily_factors.each_with_index do |factor, i| @week[i] = factor end
+    puts @week.inspect
     @week
   end
 
