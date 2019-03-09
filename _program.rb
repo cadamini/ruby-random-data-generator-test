@@ -1,7 +1,8 @@
 require_relative 'export_date_range'
 require_relative 'output_generator'
 
-# generate file for importer by running 
+# main  
+# generate file for importer using > operator 
 # ruby script.rb > filename.csv
 
 def first_arg_or_actual_year

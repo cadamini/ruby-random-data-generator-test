@@ -3,7 +3,7 @@
 class IntervalValueRandomizer
   def initialize(daily_total, distribution_factor)
     @daily_total = daily_total
-    @distribution_factor = distribution_factor # rename
+    @distribution_factor = distribution_factor
   end
 
   def calls
@@ -12,7 +12,7 @@ class IntervalValueRandomizer
 
   def handled_calls
     return 0 if calls.zero?
-    
+
     calls-3 || calls-2
   end
 

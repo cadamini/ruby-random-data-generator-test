@@ -25,8 +25,7 @@ class Distribution
   end
 
   def normal_day
-    # idea. quadrat function
-    # @day[interval] = (2 * (interval * interval) + 1) / 100 end
+    # idea. quadrat function, e.g. (2 * (interval * interval) + 1) / 100 end
     (@start_hour..@end_hour).each do |interval| @day[interval] = 1.1 end
     @day  
   end
