@@ -37,9 +37,9 @@ class OutputGenerator
 
   def output_csv_lines_for(date)
     if holiday_dates.include?(date)
-        generate_output(date, 10000, distribution.special_day, distribution.special_week)
+        generate_output(date, rand(12_000..13_500), distribution.special_day, distribution.special_week)
       else
-        generate_output(date, 10000, distribution.normal_day, distribution.normal_week)
+        generate_output(date, rand(13_500..14_500), distribution.normal_day, distribution.normal_week)
       end
   end
 
