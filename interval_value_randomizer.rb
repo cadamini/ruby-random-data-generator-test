@@ -11,7 +11,9 @@ class IntervalValueRandomizer
   end
 
   def handled_calls
-    0
+    return 0 if calls.zero?
+    
+    calls-3 || calls-2
   end
 
   def aht
@@ -27,6 +29,6 @@ class IntervalValueRandomizer
   end
 
   def random_modifier
-    rand(0.96..1.1)
+    rand(0.96..1.0)
   end
 end
