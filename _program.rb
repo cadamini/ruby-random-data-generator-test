@@ -18,5 +18,6 @@ OutputGenerator.new(
 	region: second_param_or_german_holidays, 
 	start_date: start_date, 
 	end_date: end_date,
-	queue_name: ARGV[2] || 'Test'
+	queue_name: ARGV[2] || 'Test',
+	opening_hours: ARGV[3] || [8,16]
 ).run

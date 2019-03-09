@@ -2,14 +2,29 @@ require_relative 'holiday_client'
 require_relative 'distribution'
 require_relative 'interval_value_randomizer'
 
+class OpeningHours
+  def initialize(hours_array)
+    @hours_array = hours_array
+  end
+
+  def open
+    @hours_array[0]
+  end
+
+  def close
+    @hours_array[1]
+  end
+end
+
 class OutputGenerator
   attr_reader :start_date, :end_date, :region, :queue_name
 
-  def initialize(start_date:, end_date:, region:, queue_name:)
+  def initialize(start_date:, end_date:, region:, queue_name:, opening_hours:)
     @region = region
     @start_date = start_date
     @end_date = end_date
     @queue_name = queue_name
+    @opening_hours = OpeningHours.new(opening_hours)
   end
 
   def run
@@ -56,6 +71,6 @@ class OutputGenerator
   end
 
   def distribution 
-    Distribution.new
+    Distribution.new(open_time: @opening_hours.open, close_time: @opening_hours.close)
   end
 end
