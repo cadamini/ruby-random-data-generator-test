@@ -27,7 +27,8 @@ class HolidayClient
 
   def holidays_between
     Holidays.cache_between(
-      startdate, startdate.next_year(1) - 1, *holiday_regions, :informal, :observed
+      startdate, startdate.next_year(1) - 1,
+      *holiday_regions, :informal, :observed
     ).values.flatten
   end
 end

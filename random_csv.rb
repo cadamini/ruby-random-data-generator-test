@@ -8,7 +8,7 @@ class RandomCsv
   class << self
     def generate_output
       start_date, end_date = ExportDateRange.for(first_argument_or_default_year)
-      output = OutputGenerator.new(
+      OutputGenerator.new(
         region: second_argument_or_default,
         start_date: start_date,
         end_date: end_date,
