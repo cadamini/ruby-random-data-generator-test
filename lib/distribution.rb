@@ -11,14 +11,14 @@ class Distribution
   def normal_week
     d = 1.0 / 7
     daily_factors = [d + 0.1, d + 0.12, d + 0.15, d - 0.02, d - 0.03, 0, 0]
-    daily_factors.each_with_index { |factor, i| @week[i] = factor }
+    daily_factors.each_with_index { |factor, i| @week[i] = factor.round(2) }
     @week
   end
 
   def special_week
     d = 1.0 / 7
     daily_factors = [d + 0.14, d, d + 0.09, d, d, 0, 0]
-    daily_factors.each_with_index { |factor, i| @week[i] = factor }
+    daily_factors.each_with_index { |factor, i| @week[i] = factor.round(2) }
     @week
   end
 
