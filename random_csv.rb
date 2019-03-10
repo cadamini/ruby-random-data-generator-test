@@ -1,5 +1,5 @@
-require_relative 'export_date_range'
-require_relative 'output_generator'
+require_relative 'lib/export_date_range'
+require_relative 'lib/output_generator'
 
 # generate file for importer using > operator
 # ruby random_csv.rb > filename.csv

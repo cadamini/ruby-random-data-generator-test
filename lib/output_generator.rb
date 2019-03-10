@@ -1,6 +1,6 @@
-require_relative 'lib/holiday_client'
-require_relative 'lib/distribution'
-require_relative 'lib/interval_value_randomizer'
+require_relative 'holiday_client'
+require_relative 'distribution'
+require_relative 'interval_value_randomizer'
 
 class OpeningHours
   def initialize(hours_array)
