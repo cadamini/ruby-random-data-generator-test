@@ -17,7 +17,7 @@ class HolidayClient
     holidays
   end
 
-  private 
+  private
 
   def holiday_regions
     Holidays.available_regions.select do |region|

@@ -1,22 +1,21 @@
 require 'date'
 
 class ExportDateRange
-
   def self.for(year)
-    return start_date(year), end_date(year)
+    [start_date(year), end_date(year)]
   end
 
-  private 
+  private
 
   def self.start_date(year)
-    Date.new(year,1,1)
+    Date.new(year, 1, 1)
   end
 
   def self.end_date(year)
     if this_year?(year)
-      Date.new(year, Date.today.month, Date.today.day-1)
+      Date.new(year, Date.today.month, Date.today.day - 1)
     else
-      Date.new(year,12,31)
+      Date.new(year, 12, 31)
     end
   end
 

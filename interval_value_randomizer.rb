@@ -13,7 +13,7 @@ class IntervalValueRandomizer
   def handled_calls
     return 0 if calls.zero?
 
-    calls-3 || calls-2
+    calls - 3 || calls - 2
   end
 
   def aht
