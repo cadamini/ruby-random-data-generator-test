@@ -3,7 +3,7 @@ require 'distribution'
 
 RSpec.describe Distribution do
   let(:distribution) do
-    Distribution.new(open_time: 4, close_time: 5)
+    Distribution.new(open_time: 4, close_time: 5, interval: 15)
   end
 
   it 'is a distribution' do

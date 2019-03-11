@@ -1,11 +1,14 @@
 class Distribution
   attr_writer :day
+  attr_accessor :interval
 
-  def initialize(open_time:, close_time:)
-    @start_hour = open_time * 4
-    @end_hour = close_time * 4
-    @day = Array.new(96) { 0 }
+  def initialize(open_time:, close_time:, interval:)
+    @interval = interval
+    @start_hour = open_time * intervals_per_hour
+    @end_hour = close_time * intervals_per_hour
+    @day = Array.new(number_of_intervals) { 0 }
     @week = Array.new(7) { 0 }
+   
   end
 
   def normal_week
@@ -24,12 +27,26 @@ class Distribution
 
   def normal_day
     # idea. quadrat function, e.g. (2 * (interval * interval) + 1) / 100 end
-    (@start_hour..@end_hour).each { |interval| @day[interval] = 1.1 }
+    (@start_hour..@end_hour).each { |raster| @day[raster] = 1.1 }
     @day
   end
 
   def special_day
-    (@start_hour..@end_hour).each { |interval| @day[interval] = 1 }
+    (@start_hour..@end_hour).each { |raster| @day[raster] = 1 }
     @day
+  end
+
+  private
+
+  def intervals_per_hour
+    60 / interval
+  end
+
+  def number_of_intervals
+    minutes_per_day / interval
+  end
+
+  def minutes_per_day
+    1440
   end
 end

@@ -7,14 +7,15 @@ class OutputPrinter
       puts 'Queue;Date;Time;CallsOffered;CallsHandled;AHT'
     end
 
-    def line(queue_name, date, value, interval, daily_volume)
-    random = random_value(daily_volume, value)
-      puts "#{queue_name};#{date.strftime('%d.%m.%Y')};#{time_string(interval)};" \
+    def line(queue_name, date, interval, raster, value, daily_volume)
+      random = random_value(daily_volume, value)
+
+      puts "#{queue_name};#{date.strftime('%d.%m.%Y')};#{time_string(interval*raster)};" \
            "#{random.calls};#{random.handled_calls};#{random.aht}"
     end
 
-    def time_string(interval)
-      TimeStringBuilder.create_for(interval)
+    def time_string(minutes)
+      TimeStringBuilder.create_for(minutes)
     end
 
     def random_value(daily_volume, value)

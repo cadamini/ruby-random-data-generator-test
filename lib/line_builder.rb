@@ -5,13 +5,14 @@ require_relative 'output_printer'
 
 class LineBuilder
 
-  attr_reader :queue, :holiday_dates, :date
+  attr_reader :queue, :holiday_dates, :date, :interval
 
-  def initialize(queue, date, opening_hours, holiday_dates)
+  def initialize(queue, date, opening_hours, interval, holiday_dates)
   	@date = date
   	@weekly_volume = rand(12_000..13_500)
   	@opening_hours = OpeningHours.new(opening_hours)
   	@holiday_dates = holiday_dates
+  	@interval = interval
   	@queue = queue 
   end
 
@@ -26,8 +27,10 @@ class LineBuilder
   private 
 
   def build(daily_distribution, weekly_distribution)
-    daily_distribution.each_with_index do |value, interval|
-      OutputPrinter.line(queue, date, value, interval, daily_volume(weekly_distribution))
+    daily_distribution.each_with_index do |value, raster|
+      OutputPrinter.line(
+      	queue, date, interval, raster, value, daily_volume(weekly_distribution)
+      	)
   	end
   end
 
@@ -37,6 +40,7 @@ class LineBuilder
 
   def distribution
     Distribution.new(open_time: @opening_hours.opening,
-                     close_time: @opening_hours.closing)
+                     close_time: @opening_hours.closing,
+                     interval: interval)
   end
 end

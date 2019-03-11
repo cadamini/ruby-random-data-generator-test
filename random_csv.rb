@@ -8,10 +8,11 @@ class RandomCsv
   class << self
     def generate_output
       start_date, end_date = ExportDateRange.for(year)
-      OutputGenerator.new(
+      gen = OutputGenerator.new(
         region: region,
         start_date: start_date,
         end_date: end_date,
+        interval: 15,
         queue_name: ARGV[2] || 'Test',
         opening_hours: ARGV[3] || [8, 16]
       ).run
