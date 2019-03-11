@@ -71,7 +71,7 @@ class OutputGenerator
                       daily_distribution, weekly_destribution)
     daily_volume = weekly_destribution[date.wday] * weekly_volume
     daily_distribution.each_with_index do |value, interval|
-      random = IntervalValueRandomizer.new(daily_volume, value)
+      random = ValueRandomizer.new(daily_volume, value)
       time_string = build_time_string(interval)
       puts "#{queue_name};#{date.strftime('%d.%m.%Y')};#{time_string};" \
            "#{random.calls};#{random.handled_calls};#{random.aht}"

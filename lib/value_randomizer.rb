@@ -1,6 +1,6 @@
 # input: daily total and a distribution percentage
 # output values per interval
-class IntervalValueRandomizer
+class ValueRandomizer
   def initialize(daily_total, distribution_factor)
     @daily_total = daily_total
     @distribution_factor = distribution_factor
