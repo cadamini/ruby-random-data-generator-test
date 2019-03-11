@@ -7,11 +7,11 @@ class OpeningHours
     @hours_array = hours_array
   end
 
-  def open
+  def opening
     @hours_array[0]
   end
 
-  def close
+  def closing
     @hours_array[1]
   end
 end
@@ -79,7 +79,7 @@ class OutputGenerator
   end
 
   def distribution
-    Distribution.new(open_time: @opening_hours.open,
-                     close_time: @opening_hours.close)
+    Distribution.new(open_time: @opening_hours.opening,
+                     close_time: @opening_hours.closing)
   end
 end
