@@ -3,8 +3,7 @@ require 'output_generator.rb'
 require 'holiday_client'
 
 RSpec.describe OpeningHours do
-
-  let(:opening_hours) { OpeningHours.new([5,8]) }
+  let(:opening_hours) { OpeningHours.new([5, 8]) }
 
   it 'gets an array with integers as hours' do
     expect(opening_hours).to be_a OpeningHours

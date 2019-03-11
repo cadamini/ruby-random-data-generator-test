@@ -1,7 +1,7 @@
 require_relative 'value_randomizer'
 require_relative 'time_string_builder'
 
-class OutputPrinter 
+class OutputPrinter
   class << self
     def header
       puts 'Queue;Date;Time;CallsOffered;CallsHandled;AHT'
@@ -9,8 +9,8 @@ class OutputPrinter
 
     def line(queue_name, date, interval, raster, value, daily_volume)
       random = random_value(daily_volume, value)
-
-      puts "#{queue_name};#{date.strftime('%d.%m.%Y')};#{time_string(interval*raster)};" \
+      puts "#{queue_name};#{date.strftime('%d.%m.%Y')};" \
+           "#{time_string(interval * raster)};" \
            "#{random.calls};#{random.handled_calls};#{random.aht}"
     end
 

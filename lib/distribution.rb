@@ -8,7 +8,6 @@ class Distribution
     @end_hour = close_time * intervals_per_hour
     @day = Array.new(number_of_intervals) { 0 }
     @week = Array.new(7) { 0 }
-   
   end
 
   def normal_week

@@ -11,11 +11,8 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
-    - 'distribution.rb'
-    - 'export_date_range.rb'
-    - 'holiday_client.rb'
-    - 'output_generator.rb'
-    - 'random_csv.rb'
+    - '*.rb'
+    - 'lib/*.rb'
 
 # Offense count: 1
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
@@ -24,3 +21,7 @@ Metrics/LineLength:
   Max: 80
   Exclude: 
     - 'spec/spec_helper.rb'
+
+Metrics/BlockLength:
+  Exclude: 
+    - 'spec/**/*'
