@@ -7,9 +7,9 @@ require_relative 'lib/output_generator'
 class RandomCsv
   class << self
     def generate_output
-      start_date, end_date = ExportDateRange.for(first_argument_or_default_year)
+      start_date, end_date = ExportDateRange.for(year)
       OutputGenerator.new(
-        region: second_argument_or_default,
+        region: region,
         start_date: start_date,
         end_date: end_date,
         queue_name: ARGV[2] || 'Test',
@@ -19,11 +19,11 @@ class RandomCsv
 
     private
 
-    def first_argument_or_default_year
+    def year
       ARGV[0].to_i > 0 ? ARGV[0].to_i : default_year
     end
 
-    def second_argument_or_default
+    def region
       !ARGV[1].nil? ? ARGV[1] : default_region
     end
 
