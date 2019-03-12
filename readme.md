@@ -16,16 +16,16 @@ will show the context help which explains the usage
 
 You need to use them in the following order
 
-YEAR, e.g. 2020, default: 2019
-REGION, e.g. 'de', 'uk' or 'us', default: 'de'
-QUEUE NAME, e.g. Hotline, default: 'Test-Queue'
-OPENINGS START time, e.g. 10 default: 8
-OPENINGS END time, e.g. 20, default: 18
-INTERVAL, e.g. 30, default: 15
+> YEAR, e.g. 2020, default: 2019  
+REGION, e.g. 'de', 'uk' or 'us', default: 'de'  
+QUEUE NAME, e.g. Hotline, default: 'Test-Queue'  
+OPENINGS START time, e.g. 10 default: 8  
+OPENINGS END time, e.g. 20, default: 18  
+INTERVAL, e.g. 30, default: 15  
 
 ### Example
 
-ruby random_csv.rb 2019 'en' 'Hotline' 10 20
+`ruby random_csv.rb 2019 'en' 'Hotline' 10 20 15`
 
 ### Minimal parameter set 
 
