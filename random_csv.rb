@@ -20,9 +20,12 @@ class RandomCsv
         puts ''
         puts 'Example:'
         puts "ruby random_csv.rb #{Date.today.year} 'en' 'Hotline' 10 20\n\n" 
+        puts "To generate a file use the > operator\n\n"
+        puts 'Example:'
+        puts "ruby random_csv.rb #{Date.today.year} 'en' 'Hotline' 10 20 > 'output_files/Hotline-#{Date.today.year}.csv' \n\n" 
         exit
       end
-      
+
       OutputGenerator.new(
         region: region,
         start_date: start_date,
