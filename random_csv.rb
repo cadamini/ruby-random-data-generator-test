@@ -1,5 +1,5 @@
 require_relative 'lib/export_date_range'
-require_relative 'lib/output_generator'
+require_relative 'lib/output_data_generator'
 
 # generate file for importer using > operator
 # ruby random_csv.rb > filename.csv
@@ -7,7 +7,7 @@ require_relative 'lib/output_generator'
 class RandomCsv
   class << self
     def generate_output
-      start_date, end_date = ExportDateRange.for(year)
+      date_range = ExportDateRange.new(year: year)
       if ['help'].include?(ARGV[0]) || ARGV[0].nil?
         puts "\nRandom CSV File Creator\n\n"
         puts "Run this tool with 4 parameters!\n\n"
@@ -26,14 +26,14 @@ class RandomCsv
         exit
       end
 
-      OutputGenerator.new(
-        region: region,
-        start_date: start_date,
-        end_date: end_date,
-        interval: ARGV[5].to_i > 0 ? ARGV[5].to_i : 15,
-        queue_name: ARGV[2] || 'Test-Queue',
-        opening_hours: [ARGV[3].to_i, ARGV[4].to_i] || [8,18]
-      ).run
+      OutputDataGenerator.new(
+        # region: region,
+        start_date: date_range.start_date,
+        end_date: date_range.end_date,
+        # interval: ARGV[5].to_i > 0 ? ARGV[5].to_i : 15,
+        #queue_name: ARGV[2] || 'Test-Queue',
+        # opening_hours: [ARGV[3].to_i, ARGV[4].to_i] || [8,18]
+      ).generate
     end
 
     private

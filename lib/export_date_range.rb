@@ -1,27 +1,26 @@
 require 'date'
 
 class ExportDateRange
-  class << self
-    def for(year)
-      [start_date(year), end_date(year)]
-    end
+  attr_reader :year, :start_date, :end_date
 
-    private
+  def initialize(year:)
+    @year = year
+    @start_date = Date.new(year, 1, 1)
+    @end_date = this_year? ? until_yesterday : complete_year
+  end
 
-    def start_date(year)
-      Date.new(year, 1, 1)
-    end
+  private
 
-    def end_date(year)
-      if this_year?(year)
-        Date.new(year, Date.today.month, Date.today.day - 1)
-      else
-        Date.new(year, 12, 31)
-      end
-    end
+  def this_year?
+    year == Date.today.year
+  end
 
-    def this_year?(year)
-      year == Date.today.year
-    end
+  def until_yesterday
+    Date.new(year, Date.today.month, Date.today.day - 1)
+  end
+
+  def complete_year
+    Date.new(year, 12, 31)
   end
 end
+

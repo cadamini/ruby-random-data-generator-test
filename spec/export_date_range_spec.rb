@@ -3,7 +3,8 @@ require 'export_date_range.rb'
 
 RSpec.describe ExportDateRange do
   it 'returns an array with start and enddate' do
-    expect(ExportDateRange.for(2018)).to eq [
+    date_range = ExportDateRange.new(year: 2018)
+    expect(date_range.start_date).to eq [
       Date.new(2018, 1, 1), Date.new(2018, 12, 31)
     ]
   end
@@ -15,7 +16,7 @@ RSpec.describe ExportDateRange do
       Date.new(2019, Date.today.month, Date.today.day - 1)
     ]
     expect(
-      ExportDateRange.for(current_year)
+      ExportDateRange.new(year: current_year)
     ).to eq expected_result
   end
 end
