@@ -1,49 +1,56 @@
-require_relative 'lib/export_date_range'
-require_relative 'lib/output_generator'
-
+require_relative 'lib/range'
+require_relative 'lib/input'
+require_relative 'lib/normal_distribution'
+require_relative 'lib/time_formatter'
 # generate file for importer using > operator
 # ruby random_csv.rb > filename.csv
 
 class RandomCsv
   class << self
     def generate_output
-      start_date, end_date = ExportDateRange.for(year)
       if ['help'].include?(ARGV[0]) || ARGV[0].nil?
         puts "\nRandom CSV File Creator\n\n"
-        puts "Run this tool with 4 parameters!\n\n"
-        puts "YEAR, e.g. #{Date.today.year+1}, default: #{Date.today.year}"
-        puts "REGION, e.g. 'de', 'uk' or 'us', default: 'de'"
-        puts "QUEUE NAME, e.g. Hotline, default: 'Test-Queue'"
-        puts 'OPENINGS START time, e.g. 10 default: 8'
-        puts 'OPENINGS END time, e.g. 20, default: 18'
-        puts 'INTERVAL, e.g. 30, default: 15'
-        puts ''
+        puts "Parameters:\n\n"
+        puts "year, e.g. 2020"
         puts 'Example:'
-        puts "ruby random_csv.rb #{Date.today.year} 'en' 'Hotline' 10 20\n\n" 
-        puts "To generate a file use the > operator\n\n"
-        puts 'Example:'
-        puts "ruby random_csv.rb #{Date.today.year} 'en' 'Hotline' 10 20 > 'output_files/Hotline-#{Date.today.year}.csv' \n\n" 
+        puts "ruby random_csv.rb 2020 \n\n"
+        puts "Use > 'path/to/file' to generate a file."
         exit
       end
 
-      OutputGenerator.new(
-        region: region,
-        start_date: start_date,
-        end_date: end_date,
-        interval: ARGV[5].to_i > 0 ? ARGV[5].to_i : 15,
-        queue_name: ARGV[2] || 'Test-Queue',
-        opening_hours: [ARGV[3].to_i, ARGV[4].to_i] || [8,18]
-      ).run
-    end
+      inputs = Input.new
+      range = Range.new(inputs.year)
+      queue_name = "test"
+      
+      puts 'Queue;Date;Time;Offered;Handled;AHT;Channel' # header
 
-    private
+      (range.start_date..range.end_date).each do |date|
+        formatted_date = date.strftime('%d.%m.%Y')
+        # build (random) Normal Distribution
+        # Todo: Values should not be the same per week
+        # weekly_volume = rand(12_000..13_500)
+        calls_offered_distribution = NormalDistribution.new.day
+        # for day
+        # TODO: do not loop dates but build result array/hash/objects and output later
+        0.upto(95) do |interval|
+          offered = calls_offered_distribution[interval]
+          aht = (rand(180..240) if offered != 0) || 0
+          handled = (offered - rand(1..4) if offered > 4) || offered
+          time_value = TimeFormatter.convert_minutes(interval * 15)
 
-    def year
-      ARGV[0].to_i > 0 ? ARGV[0].to_i : Date.today.year
-    end
+          puts "#{queue_name};#{formatted_date};#{time_value};#{offered};#{handled};#{aht};calls"
+        end
+        # special volumes for holidays
 
-    def region
-      !ARGV[1].nil? ? ARGV[1] : 'de'
+        # holidays should be different
+        # def holiday_dates
+        #   HolidayClient.new(
+        #     start_date, end_date, region
+        #   ).holidays.map { |h| h[1] }
+        # end
+        # if holiday_dates.include?(date)
+        #   # build special day
+      end
     end
   end
 end
