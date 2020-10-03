@@ -1,7 +1,7 @@
 # Random CSV data generator
 
-This is the attempt to generate random CSV data.    
-It creates data for a year. For the current year it generates data until today.
+This is the attempt to generate random normally distributed CSV data for a year.      
+The script creates data for a year. For the current year it generates data until today.
 
 ## Usage
 
@@ -9,7 +9,7 @@ It creates data for a year. For the current year it generates data until today.
 
 will show the context help which explains the usage
 
-The script support a data parameter:  
+The script supports a year parameter:  
 
 `ruby random_csv.rb 2020`
 
@@ -17,4 +17,4 @@ The script support a data parameter:
 
 To generate a file use the > operator
 
-`ruby random_csv.rb 2019 'en' 'Hotline' 10 20 > 'output_files/Hotline-2019.csv'`
+`ruby random_csv.rb 2020 > path/to/file`
