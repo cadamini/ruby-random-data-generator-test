@@ -1,5 +1,5 @@
 require 'spec_helper.rb'
-require 'output_generator.rb'
+require 'opening_hours.rb'
 require 'holiday_client'
 
 RSpec.describe OpeningHours do
