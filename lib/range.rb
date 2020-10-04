@@ -3,8 +3,8 @@ require 'date'
 class Range
   attr_reader :year, :start_date, :end_date
 
-  def initialize(year)
-    @year = year.to_i
+  def initialize
+    @input = Input.new
   end
 
   def start_date
@@ -23,5 +23,9 @@ class Range
 
   def this_year?(year)
     year == Date.today.year
+  end
+
+  def year
+    @input.year.to_i
   end
 end
